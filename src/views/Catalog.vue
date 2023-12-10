@@ -12,9 +12,13 @@
 
 <script setup>
     import { onMounted } from 'vue';
+    import { productsStore }  from "@/stores/products.js";
+
+    const productStore = productsStore();
 
     onMounted(() => {
-        console.log('onMounted');
+        console.log('onMounted')
+        productStore.fetchProductsFromDB()
     })
 </script>
 

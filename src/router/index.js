@@ -9,10 +9,7 @@ const router = createRouter({
       name: 'Catalog',
       component: Catalog
     },
-    {
-    }
   ]
 })
 
 export default router
-
