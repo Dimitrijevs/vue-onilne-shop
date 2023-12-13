@@ -8,7 +8,12 @@
             <p>Brand: {{ selectedProduct.brand }}</p>
             <p>Description: {{ selectedProduct.description }}</p>
             <p>Price: {{ selectedProduct.price }} €</p>
-            <button @click="addToCard">Add to card</button>
+            <v-btn
+                variant="elevated"
+                color="indigo-lighten-3"
+                @click="addToCart">
+                Add to cart
+            </v-btn>
         </div>
     </div>
 </template>
@@ -22,23 +27,31 @@
 </script>
 
 <script setup>
-    import { computed } from 'vue';
-    import { productsStore } from '@/stores/products';
-    import { useRoute, useRouter} from 'vue-router';
+    import { computed } from "vue";
+    import { productsStore } from "@/stores/products";
+    import { useRoute, useRouter } from "vue-router";
 
-    const store = productsStore();
-    const router = useRouter();
-    const route = useRoute();
+    const store = productsStore()
+    const router = useRouter()
+    const route = useRoute()
 
     const selectedProduct = computed(() => {
         return store.products.find((item) => item.id === Number(route.params.id))
     })
 
-    const addToCard = () => {
-        console.log('test');
+    const addToCart = () => {
+        store.addToCart(selectedProduct.value)
+        router.push({ name: 'CartView' })
     }
 </script>
 
 <style scoped>
+    .product {
+    display: flex;
+    margin-top: 50px;
+    }
 
+    .product-image {
+    margin-right: 24px;
+    }
 </style>
